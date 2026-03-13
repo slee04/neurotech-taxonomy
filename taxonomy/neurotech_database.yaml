@@ -1,0 +1,771 @@
+meta:
+  name: "NeuroCET Neurotechnology Database v0"
+  purpose: "Catalog of specific neurotechnologies with technical specifications and ontology mappings"
+  related_to: "ontology_v0.yaml"
+  last_updated: "2026-02-04"
+  notes: "Expanded to include structural imaging, PET, SPECT, optogenetics"
+
+categories:
+  - sensing                # Recording/measuring neural signals or structure
+  - modulation             # Stimulating or modifying neural activity
+  - integrated_systems     # Combined sensing + output/feedback
+
+technologies:
+
+  # =============================================================================
+  # SENSING: ELECTROPHYSIOLOGY (neural activity via electrical/magnetic signals)
+  # =============================================================================
+
+  - id: NT001
+    name: "Electroencephalography (EEG)"
+    category: sensing
+    subcategory: electrophysiology
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.approved_broad, neuro.maturity.consumer]
+
+    specs:
+      spatial_resolution: "cm-scale"
+      temporal_resolution: "ms"
+      portability: [clinical, portable, wearable]
+
+    typical_applications:
+      - epilepsy diagnosis and monitoring
+      - sleep studies
+      - BCI research
+      - neurofeedback
+      - cognitive research
+
+    examples:
+      clinical: ["clinical EEG systems", "ambulatory EEG"]
+      consumer: ["Muse", "Emotiv EPOC", "OpenBCI"]
+
+    search_terms: ["EEG", "electroencephalograph*"]
+
+    notes: "Gold standard for temporal resolution; limited spatial precision. Widely accessible."
+
+  - id: NT002
+    name: "Magnetoencephalography (MEG)"
+    category: sensing
+    subcategory: electrophysiology
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.magnetic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_limited
+
+    specs:
+      spatial_resolution: "mm-cm scale"
+      temporal_resolution: "ms"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - epilepsy localization
+      - presurgical mapping
+      - cognitive research
+
+    examples:
+      clinical: ["SQUID-based MEG", "OPM-MEG (emerging)"]
+
+    search_terms: ["MEG", "magnetoencephalograph*"]
+
+    notes: "Excellent temporal resolution with better spatial than EEG. Very expensive, requires shielding."
+
+  - id: NT003
+    name: "Electrocorticography (ECoG)"
+    category: sensing
+    subcategory: electrophysiology
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_limited
+
+    specs:
+      spatial_resolution: "mm-scale"
+      temporal_resolution: "ms"
+      portability: [implanted]
+
+    typical_applications:
+      - epilepsy monitoring (pre-surgical)
+      - BCI research
+      - speech decoding research
+
+    examples:
+      clinical: ["subdural grid electrodes", "strip electrodes"]
+
+    search_terms: ["ECoG", "electrocorticograph*", "subdural electrode*"]
+
+    notes: "Requires craniotomy. Higher signal quality than EEG. Used clinically for epilepsy."
+
+  - id: NT004
+    name: "Intracortical Microelectrode Arrays"
+    category: sensing
+    subcategory: electrophysiology
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.clinical_trial, neuro.maturity.experimental]
+
+    specs:
+      spatial_resolution: "single-neuron"
+      temporal_resolution: "sub-ms"
+      portability: [implanted]
+
+    typical_applications:
+      - motor BCI for paralysis
+      - neuroscience research
+
+    examples:
+      research: ["Utah array (Blackrock)", "Neuropixels"]
+      clinical_trial: ["BrainGate"]
+
+    search_terms: ["microelectrode array*", "Utah array", "intracortical electrode*", "Neuropixels"]
+
+    notes: "Highest resolution but most invasive. Longevity challenges due to tissue response."
+
+  # =============================================================================
+  # SENSING: HEMODYNAMIC / FUNCTIONAL IMAGING (neural activity via blood flow/metabolism)
+  # =============================================================================
+
+  - id: NT005
+    name: "Functional Magnetic Resonance Imaging (fMRI)"
+    category: sensing
+    subcategory: hemodynamic_functional
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.magnetic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "mm-scale"
+      temporal_resolution: "seconds (BOLD response)"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - brain mapping
+      - presurgical planning
+      - cognitive neuroscience research
+      - lie detection (controversial)
+
+    examples:
+      clinical: ["Siemens", "GE", "Philips MRI systems"]
+
+    search_terms: ["fMRI", "functional MRI", "functional magnetic resonance", "BOLD"]
+
+    notes: "High spatial resolution but slow temporal response. Expensive, non-portable."
+
+  - id: NT006
+    name: "Functional Near-Infrared Spectroscopy (fNIRS)"
+    category: sensing
+    subcategory: hemodynamic_functional
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.optical
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.approved_limited, neuro.maturity.consumer]
+
+    specs:
+      spatial_resolution: "cm-scale"
+      temporal_resolution: "100ms - seconds"
+      portability: [portable, wearable]
+
+    typical_applications:
+      - cognitive load monitoring
+      - infant/pediatric research
+      - BCI
+      - neuroergonomics
+
+    examples:
+      research: ["NIRx", "Hitachi ETG"]
+      consumer: ["Kernel Flow"]
+
+    search_terms: ["fNIRS", "functional near-infrared", "near-infrared spectroscopy", "NIRS"]
+
+    notes: "More portable than fMRI with similar hemodynamic signal. Limited depth penetration."
+
+  - id: NT007
+    name: "Positron Emission Tomography (PET)"
+    category: sensing
+    subcategory: hemodynamic_functional
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.chemical  # radiotracer-based
+      invasiveness: neuro.invasiveness.minimally_invasive  # requires radiotracer injection
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "mm-scale"
+      temporal_resolution: "minutes"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - neurodegenerative disease diagnosis (Alzheimer's, Parkinson's)
+      - tumor imaging
+      - neurotransmitter/receptor studies
+      - epilepsy focus localization
+
+    examples:
+      clinical: ["FDG-PET", "amyloid PET", "dopamine PET"]
+
+    search_terms: ["PET", "positron emission tomography", "FDG-PET", "amyloid PET"]
+
+    notes: "Measures metabolic activity and receptor binding. Requires radiotracer and cyclotron access."
+
+  - id: NT008
+    name: "Single-Photon Emission Computed Tomography (SPECT)"
+    category: sensing
+    subcategory: hemodynamic_functional
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.chemical  # radiotracer-based
+      invasiveness: neuro.invasiveness.minimally_invasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "cm-scale"
+      temporal_resolution: "minutes"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - cerebral blood flow imaging
+      - epilepsy localization (ictal SPECT)
+      - dementia evaluation
+      - Parkinson's diagnosis (DaTscan)
+
+    examples:
+      clinical: ["DaTscan", "HMPAO SPECT", "ictal SPECT"]
+
+    search_terms: ["SPECT", "single-photon emission", "DaTscan"]
+
+    notes: "Lower resolution and sensitivity than PET but more widely available and less expensive."
+
+  # =============================================================================
+  # SENSING: STRUCTURAL / ANATOMICAL IMAGING (brain structure)
+  # =============================================================================
+
+  - id: NT009
+    name: "Structural Magnetic Resonance Imaging (MRI)"
+    category: sensing
+    subcategory: structural_anatomical
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.magnetic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "sub-mm to mm"
+      temporal_resolution: "N/A (static)"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - neurological diagnosis
+      - tumor detection
+      - presurgical planning
+      - brain volumetry
+      - tracking disease progression
+
+    examples:
+      clinical: ["T1-weighted MRI", "T2-weighted MRI", "FLAIR"]
+
+    search_terms: ["MRI", "magnetic resonance imaging", "structural MRI", "brain MRI"]
+
+    notes: "Gold standard for brain structural imaging. High soft tissue contrast. No ionizing radiation."
+
+  - id: NT010
+    name: "Computed Tomography (CT)"
+    category: sensing
+    subcategory: structural_anatomical
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.other  # X-ray based
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "mm-scale"
+      temporal_resolution: "seconds (fast acquisition)"
+      portability: [fixed_facility, some portable]
+
+    typical_applications:
+      - acute stroke/trauma (first-line)
+      - hemorrhage detection
+      - skull fractures
+      - calcifications
+
+    examples:
+      clinical: ["head CT", "CT angiography", "perfusion CT"]
+
+    search_terms: ["CT", "computed tomography", "CAT scan", "brain CT"]
+
+    notes: "Fast acquisition, good for acute settings. Uses ionizing radiation. Lower soft tissue contrast than MRI."
+
+  - id: NT011
+    name: "Diffusion Tensor Imaging (DTI)"
+    category: sensing
+    subcategory: structural_anatomical
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.magnetic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "mm-scale"
+      temporal_resolution: "N/A (static)"
+      portability: [fixed_facility]
+
+    typical_applications:
+      - white matter tractography
+      - connectivity mapping
+      - traumatic brain injury assessment
+      - presurgical planning (eloquent tracts)
+      - neurodevelopmental research
+
+    examples:
+      clinical: ["DTI tractography", "fractional anisotropy maps"]
+
+    search_terms: ["DTI", "diffusion tensor", "tractography", "diffusion MRI", "DWI"]
+
+    notes: "Maps white matter connectivity by measuring water diffusion. MRI-based technique."
+
+  # =============================================================================
+  # SENSING: NEURAL PROXY (indirect measures correlated with neural activity)
+  # =============================================================================
+
+  - id: NT012
+    name: "Eye Tracking"
+    category: sensing
+    subcategory: neural_proxy
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.optical
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.neural_proxy
+      maturity: [neuro.maturity.approved_broad, neuro.maturity.consumer]
+
+    specs:
+      measures: ["gaze position", "fixations", "saccades", "pupil dilation"]
+      temporal_resolution: "ms"
+      portability: [fixed, portable, wearable, integrated]
+
+    typical_applications:
+      - cognitive research
+      - usability testing
+      - assistive technology
+      - driver monitoring
+      - VR/AR interaction
+
+    examples:
+      research: ["Tobii", "SR Research EyeLink"]
+      consumer: ["Apple Vision Pro", "Meta Quest Pro", "Tobii Aware"]
+
+    search_terms: ["eye track*", "gaze track*", "pupillometry", "oculomotor"]
+
+    notes: "Mature technology increasingly integrated into consumer devices. Raises attention/intent inference concerns."
+
+  - id: NT013
+    name: "Facial EMG / Emotion Recognition"
+    category: sensing
+    subcategory: neural_proxy
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: [neuro.mechanism.electrical, neuro.mechanism.optical]
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.neural_proxy
+      maturity: [neuro.maturity.consumer, neuro.maturity.approved_limited]
+
+    specs:
+      measures: ["facial muscle activity", "facial expressions", "inferred emotion"]
+      modalities: ["EMG sensors", "camera-based"]
+
+    typical_applications:
+      - emotion research
+      - market research
+      - driver fatigue monitoring
+      - mental health monitoring (research)
+
+    examples:
+      research: ["iMotions", "Affectiva", "Noldus FaceReader"]
+
+    search_terms: ["facial EMG", "emotion recognition", "affective computing", "facial expression analysis"]
+
+    notes: "Camera-based emotion inference is controversial (validity, bias concerns). EMG more direct but less scalable."
+
+  # =============================================================================
+  # MODULATION: NON-INVASIVE STIMULATION
+  # =============================================================================
+
+  - id: NT014
+    name: "Transcranial Magnetic Stimulation (TMS)"
+    category: modulation
+    subcategory: noninvasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.magnetic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "cm-scale"
+      depth: "cortical surface"
+      portability: [clinical, some portable]
+
+    typical_applications:
+      - treatment-resistant depression
+      - migraine treatment
+      - motor cortex mapping
+      - research
+
+    examples:
+      clinical: ["Magstim", "Nexstim", "NeuroStar"]
+
+    search_terms: ["TMS", "transcranial magnetic stimulation", "rTMS", "repetitive TMS"]
+
+    notes: "FDA-cleared for depression, migraine. rTMS for therapeutic use, single-pulse for research."
+
+  - id: NT015
+    name: "Transcranial Direct Current Stimulation (tDCS)"
+    category: modulation
+    subcategory: noninvasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.approved_limited, neuro.maturity.consumer]
+
+    specs:
+      spatial_resolution: "diffuse (cm-scale)"
+      depth: "cortical"
+      portability: [portable, wearable]
+
+    typical_applications:
+      - depression (adjunct)
+      - cognitive enhancement research
+      - stroke rehabilitation research
+      - DIY brain stimulation (consumer)
+
+    examples:
+      clinical: ["Soterix", "Neuroelectrics"]
+      consumer: ["various DIY devices", "Halo Sport"]
+
+    search_terms: ["tDCS", "transcranial direct current", "transcranial electrical stimulation", "tES"]
+
+    notes: "Lower cost and portable but diffuse effects. Consumer use raises safety concerns."
+
+  - id: NT016
+    name: "Focused Ultrasound Neuromodulation"
+    category: modulation
+    subcategory: noninvasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.acoustic
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.experimental, neuro.maturity.clinical_trial]
+
+    specs:
+      spatial_resolution: "mm-scale"
+      depth: "deep brain accessible"
+      portability: [clinical]
+
+    typical_applications:
+      - essential tremor (ablative, FDA-cleared)
+      - neuromodulation research
+      - targeted drug delivery (research)
+
+    examples:
+      clinical: ["Insightec (ablative)"]
+      research: ["low-intensity FUS for neuromodulation"]
+
+    search_terms: ["focused ultrasound", "FUS", "HIFU", "ultrasound neuromodulation", "LIFU"]
+
+    notes: "Can reach deep structures non-invasively. Ablative use approved; modulatory use experimental."
+
+  # =============================================================================
+  # MODULATION: INVASIVE STIMULATION
+  # =============================================================================
+
+  - id: NT017
+    name: "Deep Brain Stimulation (DBS)"
+    category: modulation
+    subcategory: invasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.approved_broad
+
+    specs:
+      spatial_resolution: "mm-scale (targeted nuclei)"
+      depth: "deep brain structures"
+      portability: [implanted]
+
+    typical_applications:
+      - Parkinson's disease
+      - essential tremor
+      - dystonia
+      - treatment-resistant OCD
+      - treatment-resistant depression (investigational)
+
+    examples:
+      clinical: ["Medtronic", "Abbott", "Boston Scientific"]
+
+    search_terms: ["DBS", "deep brain stimulation"]
+
+    notes: "Well-established for movement disorders. Expanding indications under investigation."
+
+  - id: NT018
+    name: "Vagus Nerve Stimulation (VNS)"
+    category: modulation
+    subcategory: invasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.electrical
+      invasiveness: [neuro.invasiveness.minimally_invasive, neuro.invasiveness.noninvasive]
+      interface_target: neuro.target.peripheral_nervous_system
+      maturity: [neuro.maturity.approved_broad, neuro.maturity.consumer]
+
+    specs:
+      target: "vagus nerve (cervical or auricular)"
+      portability: [implanted, external_wearable]
+
+    typical_applications:
+      - drug-resistant epilepsy
+      - treatment-resistant depression
+      - cluster headache
+      - inflammation modulation (research)
+
+    examples:
+      implanted: ["LivaNova VNS"]
+      external: ["gammaCore (non-invasive)", "transcutaneous VNS devices"]
+
+    search_terms: ["VNS", "vagus nerve stimulation", "vagal nerve stimulation", "tVNS"]
+
+    notes: "Implanted version well-established. Non-invasive auricular VNS expanding."
+
+  - id: NT019
+    name: "Optogenetics"
+    category: modulation
+    subcategory: invasive_stimulation
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.bidirectional_closed_loop
+      mechanism: [neuro.mechanism.optical, neuro.mechanism.chemical]  # light + genetic modification
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.experimental
+
+    specs:
+      spatial_resolution: "cell-type specific"
+      temporal_resolution: "ms"
+      portability: [implanted light delivery]
+
+    typical_applications:
+      - neuroscience research (animal models)
+      - circuit mapping
+      - early human trials (retinal)
+
+    examples:
+      research: ["ChR2", "halorhodopsin", "various opsins"]
+      clinical_trial: ["retinal optogenetics for blindness"]
+
+    search_terms: ["optogenetic*", "channelrhodopsin", "opsin"]
+
+    notes: "Revolutionary for research; human translation limited by gene therapy requirements. Retinal applications furthest along."
+
+  # =============================================================================
+  # INTEGRATED SYSTEMS: BCI
+  # =============================================================================
+
+  - id: NT020
+    name: "Invasive Motor BCI"
+    category: integrated_systems
+    subcategory: bci
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.bidirectional_closed_loop
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: neuro.target.brain
+      maturity: neuro.maturity.clinical_trial
+
+    specs:
+      signal_source: "intracortical arrays or ECoG"
+      output: "cursor control, robotic arm, speech synthesis"
+
+    typical_applications:
+      - communication for locked-in patients
+      - prosthetic limb control
+      - computer access for paralysis
+
+    examples:
+      clinical_trial: ["BrainGate", "Synchron Stentrode", "Neuralink"]
+
+    search_terms: ["BCI", "brain-computer interface", "brain-machine interface", "BMI", "neural interface"]
+
+    notes: "Most advanced BCIs in terms of performance. Requires surgery."
+
+  - id: NT021
+    name: "Non-invasive BCI"
+    category: integrated_systems
+    subcategory: bci
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.sensing
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.approved_limited, neuro.maturity.consumer]
+
+    specs:
+      signal_source: "EEG"
+      paradigms: ["P300", "SSVEP", "motor imagery", "passive monitoring"]
+
+    typical_applications:
+      - assistive communication (slow)
+      - neurofeedback gaming
+      - cognitive state monitoring
+      - research
+
+    examples:
+      clinical: ["g.tec", "Brain Products"]
+      consumer: ["Emotiv", "Neurable"]
+
+    search_terms: ["EEG BCI", "non-invasive BCI", "P300 speller", "SSVEP"]
+
+    notes: "Lower performance than invasive but accessible. Consumer applications often overpromise."
+
+  # =============================================================================
+  # INTEGRATED SYSTEMS: NEUROFEEDBACK
+  # =============================================================================
+
+  - id: NT022
+    name: "Neurofeedback"
+    category: integrated_systems
+    subcategory: neurofeedback
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.bidirectional_closed_loop
+      mechanism: [neuro.mechanism.electrical, neuro.mechanism.magnetic, neuro.mechanism.optical]
+      invasiveness: neuro.invasiveness.noninvasive
+      interface_target: neuro.target.brain
+      maturity: [neuro.maturity.approved_limited, neuro.maturity.consumer]
+
+    specs:
+      signal_source: ["EEG", "fMRI", "fNIRS"]
+      feedback_modality: ["visual", "auditory", "game-based"]
+
+    typical_applications:
+      - ADHD treatment
+      - anxiety/stress management
+      - peak performance training
+      - research
+
+    examples:
+      clinical: ["EEG neurofeedback systems"]
+      consumer: ["Muse", "Neurosity"]
+      research: ["real-time fMRI neurofeedback"]
+
+    search_terms: ["neurofeedback", "EEG biofeedback", "real-time fMRI", "brain training"]
+
+    notes: "Evidence mixed for clinical efficacy. Consumer market growing. fMRI neurofeedback research-only."
+
+  # =============================================================================
+  # INTEGRATED SYSTEMS: NEUROPROSTHETICS
+  # =============================================================================
+
+  - id: NT023
+    name: "Motor Neuroprosthetics"
+    category: integrated_systems
+    subcategory: neuroprosthetics
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.bidirectional_closed_loop
+      mechanism: neuro.mechanism.electrical
+      invasiveness: [neuro.invasiveness.invasive, neuro.invasiveness.noninvasive]
+      interface_target: [neuro.target.brain, neuro.target.peripheral_nervous_system]
+      maturity: [neuro.maturity.clinical_trial, neuro.maturity.approved_limited]
+
+    specs:
+      function: "restore motor control"
+      interfaces: ["cortical", "peripheral nerve", "muscle"]
+
+    typical_applications:
+      - prosthetic limb control
+      - exoskeleton control
+      - functional electrical stimulation
+
+    examples:
+      clinical_trial: ["DEKA arm", "targeted muscle reinnervation prosthetics"]
+      approved: ["myoelectric prosthetics"]
+
+    search_terms: ["neuroprosth*", "neural prosth*", "bionic limb", "myoelectric"]
+
+    notes: "Spans from simple myoelectric to advanced cortical-controlled systems."
+
+  - id: NT024
+    name: "Sensory Neuroprosthetics"
+    category: integrated_systems
+    subcategory: neuroprosthetics
+
+    ontology_tags:
+      interaction_mode: neuro.interaction.stimulation
+      mechanism: neuro.mechanism.electrical
+      invasiveness: neuro.invasiveness.invasive
+      interface_target: [neuro.target.brain, neuro.target.peripheral_nervous_system]
+      maturity: [neuro.maturity.approved_broad, neuro.maturity.clinical_trial]
+
+    specs:
+      function: "restore sensory perception"
+      modalities: ["auditory", "visual", "somatosensory"]
+
+    typical_applications:
+      - hearing restoration (cochlear implants)
+      - vision restoration (retinal implants)
+      - tactile feedback for prosthetics
+
+    examples:
+      approved: ["cochlear implants (Cochlear, MED-EL, AB)"]
+      clinical_trial: ["Argus II retinal implant", "cortical visual prosthetics"]
+
+    search_terms: ["cochlear implant", "retinal implant", "sensory prosth*", "auditory prosth*", "visual prosth*"]
+
+    notes: "Cochlear implants are the most successful neuroprosthetic. Visual prosthetics still limited."
